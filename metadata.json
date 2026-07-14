@@ -1,0 +1,6 @@
+{
+  "name": "OmniSaaS Developer Platform",
+  "description": "Premium full-stack SaaS platform featuring Gemini AI Chat, Team Workspace, Webhook Management, Discord & Roblox Integrations, and a robust API Key Manager.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

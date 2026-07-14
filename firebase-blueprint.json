@@ -1,0 +1,122 @@
+{
+  "entities": {
+    "User": {
+      "title": "User",
+      "description": "Represents an authenticated developer account, including plan details and credit quotas.",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string" },
+        "email": { "type": "string" },
+        "passwordHash": { "type": "string" },
+        "username": { "type": "string" },
+        "language": { "type": "string" },
+        "theme": { "type": "string" },
+        "plan": { "type": "string" },
+        "geminiCredits": { "type": "integer" },
+        "dailyUsage": { "type": "integer" },
+        "monthlyUsage": { "type": "integer" },
+        "lastReset": { "type": "string" },
+        "onboardingCompleted": { "type": "boolean" },
+        "isAdmin": { "type": "boolean" },
+        "twoFactorSecret": { "type": "string" },
+        "twoFactorEnabled": { "type": "boolean" }
+      },
+      "required": ["uid", "email", "username"]
+    },
+    "Team": {
+      "title": "Team",
+      "description": "Represents a collaborative software group with pooled credits.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "description": { "type": "string" },
+        "ownerId": { "type": "string" },
+        "credits": { "type": "integer" },
+        "maxCredits": { "type": "integer" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["id", "name", "ownerId"]
+    },
+    "Chat": {
+      "title": "Chat",
+      "description": "Represents a user's conversational interface with the Gemini API.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "userId": { "type": "string" },
+        "title": { "type": "string" },
+        "updatedAt": { "type": "string" }
+      },
+      "required": ["id", "userId", "title"]
+    },
+    "Transaction": {
+      "title": "Transaction",
+      "description": "Represents a historical financial or credit quota allocation record.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "userId": { "type": "string" },
+        "amount": { "type": "integer" },
+        "type": { "type": "string" },
+        "description": { "type": "string" },
+        "timestamp": { "type": "string" }
+      },
+      "required": ["id", "userId", "amount", "type"]
+    },
+    "Webhook": {
+      "title": "Webhook",
+      "description": "Represents an active or testing Discord/Roblox webhook integration.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "type": { "type": "string" },
+        "url": { "type": "string" },
+        "isActive": { "type": "boolean" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["id", "name", "type", "url"]
+    },
+    "WebhookLog": {
+      "title": "WebhookLog",
+      "description": "Represents historical execution entries of triggered Discord/Roblox webhook flows.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "webhookId": { "type": "string" },
+        "payload": { "type": "string" },
+        "response": { "type": "string" },
+        "statusCode": { "type": "integer" },
+        "timestamp": { "type": "string" }
+      },
+      "required": ["id", "webhookId", "timestamp"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "User",
+      "description": "Stores user records, quotas, and admin settings."
+    },
+    "/teams/{teamId}": {
+      "schema": "Team",
+      "description": "Stores group team credits and members settings."
+    },
+    "/chats/{chatId}": {
+      "schema": "Chat",
+      "description": "Stores Gemini prompt thread metadata and records."
+    },
+    "/transactions/{transactionId}": {
+      "schema": "Transaction",
+      "description": "Stores historical log ledger for credits or subscription changes."
+    },
+    "/webhooks/{webhookId}": {
+      "schema": "Webhook",
+      "description": "Stores outbound external Discord and Roblox integration webhooks."
+    },
+    "/webhookLogs/{logId}": {
+      "schema": "WebhookLog",
+      "description": "Stores full audit logging payloads for delivery verification."
+    }
+  }
+}
